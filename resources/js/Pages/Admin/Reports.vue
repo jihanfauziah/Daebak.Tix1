@@ -1,51 +1,59 @@
 <template>
   <Layout title="Export Laporan Platform">
     <div class="space-y-6">
-      <div class="card-daebak p-6 bg-white">
-        <h3 class="font-heading text-lg text-daebak-charcoal mb-2">Export Laporan Penjualan & Transaksi</h3>
-        <p class="text-xs text-daebak-charcoal/70 mb-6">Unduh laporan performa tiket, total penjualan, dan daftar user dalam format CSV / PDF.</p>
+      <Card padding-class="p-6">
+        <h3 class="font-heading text-xl text-[#657166] mb-1">Export Data & Laporan Finansial</h3>
+        <p class="text-xs text-[#657166]/70 mb-6">Unduh rekapan penjualan tiket, komisi platform, dan daftar mitra dalam format CSV.</p>
 
-        <div class="grid sm:grid-cols-3 gap-4">
-          <div class="p-5 rounded-2xl bg-daebak-cream/40 border border-daebak-sage/30 flex flex-col justify-between">
+        <div class="grid sm:grid-cols-3 gap-6">
+          <Card padding-class="p-6" custom-class="bg-[#FDE8D3]/30 border border-[#CFD6C4]/60 flex flex-col justify-between">
             <div>
-              <span class="text-2xl">📊</span>
-              <h4 class="font-heading text-base text-daebak-charcoal mt-2">Laporan Penjualan Bulanan</h4>
-              <p class="text-[11px] text-daebak-charcoal/70 mt-1">Ringkasan transaksi paid per bulan</p>
+              <span class="text-3xl block">📊</span>
+              <h4 class="font-heading text-lg text-[#657166] mt-2">Laporan Penjualan Bulanan</h4>
+              <p class="text-xs text-[#657166]/70 mt-1">Ringkasan transaksi status paid per bulan</p>
             </div>
-            <button @click="exportCSV('penjualan_bulanan')" class="btn-daebak-primary text-xs font-semibold py-2 px-4 mt-4">
-              Export CSV 📥
-            </button>
-          </div>
+            <div class="pt-4">
+              <PrimaryButton @click="exportCSV('penjualan_bulanan')" custom-class="w-full text-xs py-2.5">
+                Export CSV 📥
+              </PrimaryButton>
+            </div>
+          </Card>
 
-          <div class="p-5 rounded-2xl bg-daebak-mint/40 border border-daebak-sage/30 flex flex-col justify-between">
+          <Card padding-class="p-6" custom-class="bg-[#DAEBE3]/35 border border-[#CFD6C4]/60 flex flex-col justify-between">
             <div>
-              <span class="text-2xl">🎟️</span>
-              <h4 class="font-heading text-base text-daebak-charcoal mt-2">Laporan Tiket Terjual</h4>
-              <p class="text-[11px] text-daebak-charcoal/70 mt-1">Status tiket valid vs scanned</p>
+              <span class="text-3xl block">🎟️</span>
+              <h4 class="font-heading text-lg text-[#657166] mt-2">Laporan Tiket Terjual</h4>
+              <p class="text-xs text-[#657166]/70 mt-1">Status tiket valid vs scanned di gate</p>
             </div>
-            <button @click="exportCSV('tiket_terjual')" class="btn-daebak-primary text-xs font-semibold py-2 px-4 mt-4">
-              Export CSV 📥
-            </button>
-          </div>
+            <div class="pt-4">
+              <PrimaryButton @click="exportCSV('tiket_terjual')" custom-class="w-full text-xs py-2.5">
+                Export CSV 📥
+              </PrimaryButton>
+            </div>
+          </Card>
 
-          <div class="p-5 rounded-2xl bg-daebak-coral/20 border border-daebak-sage/30 flex flex-col justify-between">
+          <Card padding-class="p-6" custom-class="bg-[#F3C3B2]/25 border border-[#CFD6C4]/60 flex flex-col justify-between">
             <div>
-              <span class="text-2xl">🏪</span>
-              <h4 class="font-heading text-base text-daebak-charcoal mt-2">Laporan Mitra Penjual</h4>
-              <p class="text-[11px] text-daebak-charcoal/70 mt-1">Status toko seller & langganan</p>
+              <span class="text-3xl block">🏪</span>
+              <h4 class="font-heading text-lg text-[#657166] mt-2">Laporan Mitra Promotor</h4>
+              <p class="text-xs text-[#657166]/70 mt-1">Status verifikasi seller & langganan</p>
             </div>
-            <button @click="exportCSV('mitra_penjual')" class="btn-daebak-primary text-xs font-semibold py-2 px-4 mt-4">
-              Export CSV 📥
-            </button>
-          </div>
+            <div class="pt-4">
+              <PrimaryButton @click="exportCSV('mitra_penjual')" custom-class="w-full text-xs py-2.5">
+                Export CSV 📥
+              </PrimaryButton>
+            </div>
+          </Card>
         </div>
-      </div>
+      </Card>
     </div>
   </Layout>
 </template>
 
 <script setup>
 import Layout from './Layout.vue';
+import Card from '@/Components/Card.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
 
 defineProps({
   reports: Object
