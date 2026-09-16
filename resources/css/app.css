@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-blue: #99CDD8;
+    --color-mint: #DAEBE3;
+    --color-cream: #FDE8D3;
+    --color-coral: #F3C3B2;
+    --color-sage: #CFD6C4;
+    --color-charcoal: #657166;
+  }
+
+  body {
+    background-color: #FDE8D3;
+    color: #657166;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  h1, h2, h3, h4, .font-heading {
+    font-family: 'Lalita One', cursive, sans-serif;
+    letter-spacing: 0.02em;
+  }
+}
+
+/* Custom Design Utilities for Daebak.Tix */
+.bg-daebak-cream { background-color: #FDE8D3; }
+.bg-daebak-mint { background-color: #DAEBE3; }
+.bg-daebak-blue { background-color: #99CDD8; }
+.bg-daebak-coral { background-color: #F3C3B2; }
+.bg-daebak-sage { background-color: #CFD6C4; }
+.bg-daebak-charcoal { background-color: #657166; }
+
+.text-daebak-charcoal { color: #657166; }
+.text-daebak-blue { color: #99CDD8; }
+.text-daebak-coral { color: #F3C3B2; }
+
+.border-daebak-sage { border-color: #CFD6C4; }
+.border-daebak-blue { border-color: #99CDD8; }
+
+.card-daebak {
+  background-color: #FFFFFF;
+  border-radius: 1.75rem; /* ~28px */
+  box-shadow: 0 10px 30px -10px rgba(101, 113, 102, 0.08);
+  border: 1px solid rgba(207, 214, 196, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-daebak:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 35px -10px rgba(101, 113, 102, 0.12);
+}
+
+.card-soft-gradient {
+  background: linear-gradient(135deg, #DAEBE3 0%, #99CDD8 100%);
+}
+
+.card-warm-gradient {
+  background: linear-gradient(135deg, #FDE8D3 0%, #F3C3B2 100%);
+}
+
+.btn-daebak-primary {
+  background-color: #99CDD8;
+  color: #1F2937;
+  font-weight: 600;
+  border-radius: 1rem;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(153, 205, 216, 0.35);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-daebak-primary:hover:not(:disabled) {
+  background-color: #88bcc7;
+  transform: translateY(-1px);
+}
+
+.btn-daebak-secondary {
+  background-color: #F3C3B2;
+  color: #4A3525;
+  font-weight: 600;
+  border-radius: 1rem;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-daebak-secondary:hover:not(:disabled) {
+  background-color: #e2b2a1;
+}
+
+.btn-daebak-dark {
+  background-color: #657166;
+  color: #FFFFFF;
+  font-weight: 600;
+  border-radius: 1rem;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-daebak-dark:hover:not(:disabled) {
+  background-color: #535e54;
+}
+
+.input-daebak {
+  background-color: #FFFFFF;
+  border: 1.5px solid #CFD6C4;
+  border-radius: 1rem;
+  padding: 0.75rem 1rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.input-daebak:focus {
+  border-color: #99CDD8;
+  box-shadow: 0 0 0 3px rgba(153, 205, 216, 0.25);
+}

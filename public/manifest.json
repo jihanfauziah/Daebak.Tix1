@@ -1,0 +1,16 @@
+{
+  "name": "Daebak.Tix Staff Scanner",
+  "short_name": "DaebakScan",
+  "description": "PWA Scanner Tiket Konser K-Pop untuk Petugas Staf Lapangan",
+  "start_url": "/staff/dashboard",
+  "display": "standalone",
+  "background_color": "#FDE8D3",
+  "theme_color": "#99CDD8",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}
