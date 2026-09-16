@@ -1,74 +1,97 @@
 <template>
-  <Layout title="Seller Dashboard Overview" :profile="profile">
-    <!-- Stat Widgets -->
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-      <div class="card-daebak p-6 card-warm-gradient">
-        <span class="text-xs font-bold text-daebak-charcoal/70 uppercase">Total Pendapatan Tiket</span>
-        <p class="font-heading text-2xl sm:text-3xl text-daebak-charcoal mt-2">
-          Rp {{ stats.totalSales.toLocaleString('id-ID') }}
-        </p>
-        <span class="text-[10px] text-daebak-charcoal/60 mt-1 block">Hasil Penjualan Terverifikasi</span>
+  <Layout title="Dashboard Promotor Overview" :profile="profile">
+    <div class="space-y-8">
+      <!-- Stat Widgets -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <StatCard
+          label="Total Pendapatan Tiket"
+          :value="`Rp ${stats.totalSales.toLocaleString('id-ID')}`"
+          color="coral"
+          subtext="Hasil Penjualan Terverifikasi"
+        >
+          <template #icon>💰</template>
+        </StatCard>
+
+        <StatCard
+          label="Total Orders Masuk"
+          :value="stats.totalOrders"
+          color="blue"
+          subtext="Transaksi Pembeli"
+        >
+          <template #icon>📦</template>
+        </StatCard>
+
+        <StatCard
+          label="Event Aktif Dijual"
+          :value="stats.activeEvents"
+          color="mint"
+          subtext="Live di Katalog"
+        >
+          <template #icon>🎟️</template>
+        </StatCard>
+
+        <StatCard
+          label="Petugas Staf Scan"
+          :value="stats.totalStaff"
+          color="sage"
+          subtext="Akun Staf PWA Kamera"
+        >
+          <template #icon>👥</template>
+        </StatCard>
       </div>
 
-      <div class="card-daebak p-6 card-soft-gradient">
-        <span class="text-xs font-bold text-daebak-charcoal/70 uppercase">Total Orders</span>
-        <p class="font-heading text-3xl text-daebak-charcoal mt-2">{{ stats.totalOrders }}</p>
-        <span class="text-[10px] text-daebak-charcoal/60 mt-1 block">Transaksi Masuk</span>
-      </div>
-
-      <div class="card-daebak p-6 bg-white">
-        <span class="text-xs font-bold text-daebak-charcoal/70 uppercase">Event Aktif Dijual</span>
-        <p class="font-heading text-3xl text-emerald-600 mt-2">{{ stats.activeEvents }}</p>
-        <span class="text-[10px] text-daebak-charcoal/60 mt-1 block">Live di Katalog</span>
-      </div>
-
-      <div class="card-daebak p-6 bg-white">
-        <span class="text-xs font-bold text-daebak-charcoal/70 uppercase">Petugas Staf Scan (PWA)</span>
-        <p class="font-heading text-3xl text-daebak-blue mt-2">{{ stats.totalStaff }}</p>
-        <span class="text-[10px] text-daebak-charcoal/60 mt-1 block">Akun Staf Lapangan</span>
-      </div>
-    </div>
-
-    <!-- Quick Actions Banner -->
-    <div class="card-daebak p-6 bg-white mb-8 border-l-4 border-l-daebak-coral">
-      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div>
-          <h3 class="font-heading text-lg text-daebak-charcoal">Siap Membuat Event Korea Baru?</h3>
-          <p class="text-xs text-daebak-charcoal/70">Pilih durasi per-event (7 hari / 12 hari) atau gunakan paket langganan toko bulanan.</p>
+      <!-- Quick Actions Banner -->
+      <Card padding-class="p-6" custom-class="border-l-4 border-l-[#F3C3B2] bg-gradient-to-r from-white via-white to-[#FDE8D3]/30">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <h3 class="font-heading text-xl text-[#657166]">Siap Membuka Penjualan Event K-Pop Baru?</h3>
+            <p class="text-xs text-[#657166]/70 mt-1">Gunakan durasi awal (7 hari / 12 hari) atau aktifkan langganan toko bulanan.</p>
+          </div>
+          <PrimaryButton href="/seller/events/create" custom-class="text-xs px-6 py-3 shadow-md">
+            + Buat Event Baru 🚀
+          </PrimaryButton>
         </div>
-        <a href="/seller/events/create" class="btn-daebak-primary text-xs font-semibold px-6 py-3 shadow">
-          + Buat Event Baru
-        </a>
-      </div>
-    </div>
+      </Card>
 
-    <!-- My Events Grid -->
-    <div class="card-daebak p-6 bg-white">
-      <div class="flex items-center justify-between mb-4">
-        <h3 class="font-heading text-lg text-daebak-charcoal">Event Korea Milik Toko Anda</h3>
-        <a href="/seller/events" class="text-xs font-semibold text-daebak-blue hover:underline">Kelola Semua ➔</a>
-      </div>
+      <!-- My Events Grid -->
+      <div class="space-y-4">
+        <div class="flex items-center justify-between">
+          <h3 class="font-heading text-2xl text-[#657166]">Event Milik Toko Anda</h3>
+          <Link href="/seller/events" class="text-xs font-semibold text-[#2D3A30] hover:underline">
+            Kelola Semua Event ➔
+          </Link>
+        </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div v-for="event in myEvents" :key="event.id" class="card-daebak p-5 border border-daebak-sage/30">
-          <div class="relative h-40 rounded-2xl overflow-hidden bg-slate-100 mb-3">
-            <img :src="event.banner_image" :alt="event.title" class="w-full h-full object-cover" />
-            <span class="absolute top-2 right-2 bg-daebak-coral text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">
-              {{ event.category }}
-            </span>
-          </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Card
+            v-for="event in myEvents"
+            :key="event.id"
+            padding-class="p-5"
+            custom-class="flex flex-col justify-between"
+          >
+            <div class="space-y-3">
+              <div class="relative h-44 rounded-[16px] overflow-hidden bg-[#DAEBE3]/40">
+                <img :src="event.banner_image" :alt="event.title" class="w-full h-full object-cover" />
+                <div class="absolute top-2 right-2">
+                  <Badge variant="coral">{{ event.category }}</Badge>
+                </div>
+              </div>
 
-          <h4 class="font-heading text-base text-daebak-charcoal line-clamp-1">{{ event.title }}</h4>
-          <p class="text-xs text-daebak-charcoal/70 mt-1">📍 {{ event.location }}</p>
+              <div>
+                <h4 class="font-heading text-base text-[#657166] line-clamp-1">{{ event.title }}</h4>
+                <p class="text-xs text-[#657166]/70 mt-1">📍 {{ event.location }}</p>
+              </div>
+            </div>
 
-          <div class="mt-4 pt-3 border-t border-daebak-sage/20 flex items-center justify-between text-xs">
-            <span class="px-2.5 py-1 rounded-full text-[10px] font-bold" :class="event.status === 'active' ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'">
-              {{ event.status === 'active' ? 'Aktif Dijual' : 'Nonaktif / Expired' }}
-            </span>
-            <span class="text-[10px] text-daebak-charcoal/60">
-              Expired: {{ event.expires_at ? new Date(event.expires_at).toLocaleDateString('id-ID') : '-' }}
-            </span>
-          </div>
+            <div class="mt-4 pt-3 border-t border-[#CFD6C4]/30 flex items-center justify-between text-xs">
+              <Badge :variant="event.status === 'active' ? 'success' : 'danger'" :dot="true">
+                {{ event.status === 'active' ? 'Aktif Dijual' : 'Nonaktif' }}
+              </Badge>
+              <span class="text-[11px] text-[#657166]/70">
+                Exp: {{ event.expires_at ? new Date(event.expires_at).toLocaleDateString('id-ID') : '-' }}
+              </span>
+            </div>
+          </Card>
         </div>
       </div>
     </div>
@@ -76,7 +99,12 @@
 </template>
 
 <script setup>
+import { Link } from '@inertiajs/vue3';
 import Layout from './Layout.vue';
+import Card from '@/Components/Card.vue';
+import StatCard from '@/Components/StatCard.vue';
+import Badge from '@/Components/Badge.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
 
 defineProps({
   profile: Object,
