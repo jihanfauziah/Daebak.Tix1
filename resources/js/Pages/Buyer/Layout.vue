@@ -1,69 +1,90 @@
 <template>
-  <div class="min-h-screen bg-daebak-cream font-sans text-daebak-charcoal flex flex-col">
-    <!-- Navbar -->
-    <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-daebak-sage/30 px-6 py-4">
-      <div class="max-w-7xl mx-auto flex items-center justify-between">
-        <a href="/dashboard" class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-daebak-blue to-daebak-coral flex items-center justify-center text-white font-heading text-xl shadow-md">
-            D
-          </div>
-          <span class="font-heading text-2xl text-daebak-charcoal">Daebak.Tix</span>
-        </a>
+  <DashboardLayout
+    :title="pageTitle"
+    :subtitle="pageSubtitle"
+    role-title="Pembeli"
+  >
+    <template #nav>
+      <NavLink href="/dashboard" :active="isActive('/dashboard')">
+        <template #icon>🏠</template>
+        Dashboard
+      </NavLink>
+      <NavLink href="/tickets" :active="isActive('/tickets')">
+        <template #icon>🎫</template>
+        Katalog Event
+      </NavLink>
+      <NavLink href="/my-tickets" :active="isActive('/my-tickets')">
+        <template #icon>📲</template>
+        Tiket Saya (QR)
+      </NavLink>
+      <NavLink href="/orders" :active="isActive('/orders')">
+        <template #icon>📦</template>
+        Riwayat Orders
+      </NavLink>
+      <NavLink href="/wishlist" :active="isActive('/wishlist')">
+        <template #icon>❤️</template>
+        Wishlist
+      </NavLink>
+      <NavLink href="/loyalty" :active="isActive('/loyalty')">
+        <template #icon>⭐</template>
+        Loyalty Points
+      </NavLink>
+      <NavLink href="/profile" :active="isActive('/profile')">
+        <template #icon>👤</template>
+        Profil Akun
+      </NavLink>
+    </template>
 
-        <!-- Nav Links -->
-        <nav class="hidden md:flex items-center gap-8 text-xs font-semibold">
-          <a href="/dashboard" :class="isActive('/dashboard') ? 'text-daebak-blue font-bold border-b-2 border-daebak-blue pb-1' : 'hover:text-daebak-blue'">
-            🏠 Dashboard
-          </a>
-          <a href="/tickets" :class="isActive('/tickets') ? 'text-daebak-blue font-bold border-b-2 border-daebak-blue pb-1' : 'hover:text-daebak-blue'">
-            🎫 Cari Tiket
-          </a>
-          <a href="/my-tickets" :class="isActive('/my-tickets') ? 'text-daebak-blue font-bold border-b-2 border-daebak-blue pb-1' : 'hover:text-daebak-blue'">
-            📲 Tiket Digital / QR
-          </a>
-          <a href="/orders" :class="isActive('/orders') ? 'text-daebak-blue font-bold border-b-2 border-daebak-blue pb-1' : 'hover:text-daebak-blue'">
-            📦 Orders Saya
-          </a>
-          <a href="/wishlist" :class="isActive('/wishlist') ? 'text-daebak-blue font-bold border-b-2 border-daebak-blue pb-1' : 'hover:text-daebak-blue'">
-            ❤️ Wishlist
-          </a>
-          <a href="/loyalty" :class="isActive('/loyalty') ? 'text-daebak-coral font-bold border-b-2 border-daebak-coral pb-1' : 'hover:text-daebak-coral'">
-            ⭐ Loyalty Points ({{ $page.props.auth.user?.loyalty_points || 0 }} Pts)
-          </a>
-        </nav>
+    <template #topbar-actions>
+      <Link
+        href="/loyalty"
+        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[14px] bg-[#FDE8D3] border border-[#F3C3B2] text-xs font-semibold text-[#8C4E37]"
+      >
+        <span>⭐</span>
+        <span>{{ $page.props.auth?.user?.loyalty_points || 0 }} Pts</span>
+      </Link>
+    </template>
 
-        <!-- User Profile Dropdown / Logout -->
-        <div class="flex items-center gap-3">
-          <a href="/profile" class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white border border-daebak-sage/40 text-xs font-semibold hover:bg-slate-50">
-            <span>👤 {{ $page.props.auth.user?.name }}</span>
-          </a>
-          <button @click="logout" class="text-xs font-semibold text-rose-600 hover:underline">
-            Logout
-          </button>
-        </div>
-      </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="max-w-7xl mx-auto w-full p-6 md:p-8 flex-1">
-      <div v-if="$page.props.flash?.success" class="mb-6 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold shadow-sm">
-        ✅ {{ $page.props.flash.success }}
-      </div>
-      <slot></slot>
-    </main>
-  </div>
+    <slot />
+  </DashboardLayout>
 </template>
 
 <script setup>
-import { router, usePage } from '@inertiajs/vue3';
+import { computed } from 'vue';
+import { usePage, Link } from '@inertiajs/vue3';
+import DashboardLayout from '@/Components/DashboardLayout.vue';
+import NavLink from '@/Components/NavLink.vue';
+
+const props = defineProps({
+  title: {
+    type: String,
+    default: '',
+  },
+  subtitle: {
+    type: String,
+    default: '',
+  },
+});
 
 const page = usePage();
 
 const isActive = (path) => {
-  return page.url === path || page.url.startsWith(path + '/');
+  return page.url === path || (path !== '/dashboard' && page.url.startsWith(path));
 };
 
-const logout = () => {
-  router.post('/logout');
-};
+const pageTitle = computed(() => {
+  if (props.title) return props.title;
+  if (page.url.startsWith('/my-tickets')) return 'Tiket Digital Saya';
+  if (page.url.startsWith('/tickets')) return 'Katalog Tiket Event';
+  if (page.url.startsWith('/orders')) return 'Riwayat Pesanan';
+  if (page.url.startsWith('/wishlist')) return 'Event Favorit / Wishlist';
+  if (page.url.startsWith('/loyalty')) return 'Daebak Loyalty Points';
+  if (page.url.startsWith('/profile')) return 'Profil Akun';
+  return 'Dashboard Pembeli';
+});
+
+const pageSubtitle = computed(() => {
+  if (props.subtitle) return props.subtitle;
+  return 'Kelola tiket konser K-Pop, pesanan, dan loyalty reward.';
+});
 </script>

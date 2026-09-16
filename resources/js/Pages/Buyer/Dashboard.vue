@@ -2,93 +2,114 @@
   <Layout>
     <div class="space-y-8">
       <!-- Welcome Hero Banner -->
-      <div class="card-daebak p-8 card-warm-gradient relative overflow-hidden">
+      <div class="card-daebak p-8 relative overflow-hidden bg-gradient-to-r from-[#FDE8D3] via-[#F3C3B2]/30 to-[#DAEBE3] border border-[#CFD6C4]/60">
         <div class="relative z-10 space-y-3 max-w-xl">
-          <span class="px-3 py-1 rounded-full bg-white/80 font-bold text-xs text-daebak-charcoal">
-            Selamat Datang, {{ user.name }}! 👋
-          </span>
-          <h1 class="font-heading text-3xl sm:text-4xl text-daebak-charcoal leading-tight">
+          <Badge variant="mint">Selamat Datang, {{ user?.name }}! 👋</Badge>
+          <h1 class="font-heading text-3xl sm:text-4xl text-[#657166] leading-tight">
             Berburu Tiket Konser & Fanmeeting K-Pop Impianmu
           </h1>
-          <p class="text-xs sm:text-sm text-daebak-charcoal/80">
-            Dapatkan tiket digital dengan QR Code resmi dari promotor terverifikasi.
+          <p class="text-xs sm:text-sm text-[#657166]/85">
+            Dapatkan tiket digital ber-QR Code resmi dari promotor terverifikasi di Indonesia.
           </p>
-          <div class="pt-2 flex gap-3">
-            <a href="/tickets" class="btn-daebak-dark text-xs py-3 px-6 shadow-md">
+          <div class="pt-2 flex flex-wrap gap-3">
+            <PrimaryButton href="/tickets" custom-class="text-xs py-3 px-6 shadow-md">
               Jelajahi Katalog Tiket 🎟️
-            </a>
-            <a href="/my-tickets" class="btn-daebak-primary text-xs py-3 px-6 shadow-md">
+            </PrimaryButton>
+            <SecondaryButton href="/my-tickets" variant="mint" custom-class="text-xs py-3 px-6 shadow-md">
               Lihat Tiket Saya 📲
-            </a>
+            </SecondaryButton>
           </div>
         </div>
       </div>
 
-      <!-- Buyer Widgets Stats -->
+      <!-- Buyer Widgets Stats using StatCard -->
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="card-daebak p-6 bg-white">
-          <span class="text-xs font-bold text-daebak-charcoal/70 uppercase">Tiket Digital Milikmu</span>
-          <p class="font-heading text-3xl text-daebak-blue mt-2">{{ stats.myTickets }}</p>
-          <a href="/my-tickets" class="text-[11px] text-daebak-blue font-semibold hover:underline mt-1 block">Tampilkan QR Code ➔</a>
-        </div>
+        <StatCard
+          label="Tiket Digital Saya"
+          :value="stats.myTickets"
+          color="blue"
+          subtext="Tampilkan QR Code"
+        >
+          <template #icon>🎫</template>
+        </StatCard>
 
-        <div class="card-daebak p-6 bg-white">
-          <span class="text-xs font-bold text-daebak-charcoal/70 uppercase">Riwayat Orders</span>
-          <p class="font-heading text-3xl text-daebak-charcoal mt-2">{{ stats.myOrders }}</p>
-          <a href="/orders" class="text-[11px] text-daebak-charcoal/60 font-semibold hover:underline mt-1 block">Lihat Semua ➔</a>
-        </div>
+        <StatCard
+          label="Riwayat Orders"
+          :value="stats.myOrders"
+          color="sage"
+          subtext="Total transaksi"
+        >
+          <template #icon>📦</template>
+        </StatCard>
 
-        <div class="card-daebak p-6 bg-white">
-          <span class="text-xs font-bold text-daebak-charcoal/70 uppercase">Event di Wishlist</span>
-          <p class="font-heading text-3xl text-rose-500 mt-2">{{ stats.wishlists }}</p>
-          <a href="/wishlist" class="text-[11px] text-rose-500 font-semibold hover:underline mt-1 block">Lihat Wishlist ➔</a>
-        </div>
+        <StatCard
+          label="Event di Wishlist"
+          :value="stats.wishlists"
+          color="coral"
+          subtext="Favorit tersimpan"
+        >
+          <template #icon>❤️</template>
+        </StatCard>
 
-        <div class="card-daebak p-6 bg-white border border-daebak-coral/40">
-          <span class="text-xs font-bold text-daebak-charcoal/70 uppercase">Loyalty Reward Points</span>
-          <p class="font-heading text-3xl text-daebak-coral mt-2">⭐ {{ stats.loyaltyPoints }}</p>
-          <a href="/loyalty" class="text-[11px] text-daebak-coral font-semibold hover:underline mt-1 block">Tukarkan Reward ➔</a>
-        </div>
+        <StatCard
+          label="Loyalty Reward"
+          :value="`${stats.loyaltyPoints} Pts`"
+          color="cream"
+          subtext="Tukarkan reward"
+        >
+          <template #icon>⭐</template>
+        </StatCard>
       </div>
 
       <!-- Featured K-Events Grid -->
       <div class="space-y-4">
         <div class="flex items-center justify-between">
-          <h2 class="font-heading text-2xl text-daebak-charcoal">Event Korea Terpopuler Saat Ini</h2>
-          <a href="/tickets" class="text-xs font-semibold text-daebak-blue hover:underline">Lihat Semua Tiket ➔</a>
+          <div>
+            <h2 class="font-heading text-2xl text-[#657166]">Event Korea Terpopuler</h2>
+            <p class="text-xs text-[#657166]/70">Pilihan konser & fanmeeting terlaris bulan ini</p>
+          </div>
+          <Link href="/tickets" class="text-xs font-semibold text-[#2D3A30] hover:underline">
+            Lihat Semua Tiket ➔
+          </Link>
         </div>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div v-for="event in featuredEvents" :key="event.id" class="card-daebak p-5 bg-white flex flex-col justify-between hover:border-daebak-blue">
+          <Card
+            v-for="event in featuredEvents"
+            :key="event.id"
+            hoverable
+            padding-class="p-5"
+            custom-class="flex flex-col justify-between"
+          >
             <div class="space-y-3">
-              <div class="relative h-44 rounded-2xl overflow-hidden bg-slate-100">
+              <div class="relative h-44 rounded-[16px] overflow-hidden bg-[#DAEBE3]/50">
                 <img :src="event.banner_image" :alt="event.title" class="w-full h-full object-cover" />
-                <span class="absolute top-3 right-3 bg-daebak-coral text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase shadow">
-                  {{ event.category }}
-                </span>
+                <div class="absolute top-3 right-3">
+                  <Badge variant="coral">{{ event.category }}</Badge>
+                </div>
               </div>
 
               <div>
-                <span class="text-[10px] font-bold text-daebak-blue uppercase">
-                  Toko: {{ event.seller?.seller_profile?.store_name || 'Promotor Resmi' }}
+                <span class="text-[10px] font-bold text-[#8C4E37] uppercase tracking-wider">
+                  Promotor: {{ event.seller?.seller_profile?.store_name || 'Promotor Resmi' }}
                 </span>
-                <h3 class="font-heading text-base text-daebak-charcoal mt-1 line-clamp-1">{{ event.title }}</h3>
-                <p class="text-xs text-daebak-charcoal/70 mt-1">📍 {{ event.location }}</p>
+                <h3 class="font-heading text-lg text-[#657166] mt-1 line-clamp-1">{{ event.title }}</h3>
+                <p class="text-xs text-[#657166]/70 mt-0.5">📍 {{ event.location }}</p>
               </div>
             </div>
 
-            <div class="pt-4 border-t border-daebak-sage/20 mt-4 flex items-center justify-between">
+            <div class="pt-4 border-t border-[#CFD6C4]/30 mt-4 flex items-center justify-between">
               <div>
-                <span class="text-[10px] text-daebak-charcoal/60">Mulai dari</span>
-                <p class="font-bold text-daebak-charcoal text-sm">
+                <span class="text-[10px] text-[#657166]/60">Mulai dari</span>
+                <p class="font-bold text-[#657166] text-base font-sans">
                   Rp {{ Number(event.categories?.[0]?.price || 0).toLocaleString('id-ID') }}
                 </p>
               </div>
-              <a :href="`/tickets/${event.slug}`" class="btn-daebak-primary text-xs py-2 px-4">
+              <PrimaryButton :href="`/tickets/${event.slug}`" custom-class="text-xs py-2 px-4">
                 Beli Tiket ➔
-              </a>
+              </PrimaryButton>
             </div>
-          </div>
+          </Card>
         </div>
       </div>
     </div>
@@ -96,7 +117,13 @@
 </template>
 
 <script setup>
+import { Link } from '@inertiajs/vue3';
 import Layout from './Layout.vue';
+import Card from '@/Components/Card.vue';
+import StatCard from '@/Components/StatCard.vue';
+import Badge from '@/Components/Badge.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
 
 defineProps({
   user: Object,
