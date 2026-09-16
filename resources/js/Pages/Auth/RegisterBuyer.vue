@@ -1,104 +1,104 @@
 <template>
-  <div class="min-h-screen bg-daebak-cream flex items-center justify-center p-4 font-sans text-daebak-charcoal py-12">
+  <div class="min-h-screen bg-[#FDE8D3] flex items-center justify-center p-4 font-sans text-[#657166] py-12">
     <div class="w-full max-w-lg">
       <div class="text-center mb-8">
-        <a href="/" class="inline-flex items-center gap-3">
-          <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-daebak-blue to-daebak-coral flex items-center justify-center text-white font-heading text-2xl shadow-md">
-            D
+        <Link href="/" class="inline-flex items-center gap-3 group">
+          <div class="w-12 h-12 rounded-[16px] bg-[#99CDD8] flex items-center justify-center text-[#2D3A30] font-heading text-2xl shadow-[0_2px_8px_rgba(153,205,216,0.35)] group-hover:scale-105 transition-transform">
+            DT
           </div>
-          <span class="font-heading text-3xl text-daebak-charcoal">Daebak.Tix</span>
-        </a>
-        <h1 class="font-heading text-2xl text-daebak-charcoal mt-2">Daftar Akun Pembeli</h1>
-        <p class="text-xs text-daebak-charcoal/70">Buat akun untuk berburu tiket konser K-Pop impianmu</p>
+          <span class="font-heading text-3xl text-[#657166]">Daebak.Tix</span>
+        </Link>
+        <h1 class="font-heading text-2xl text-[#657166] mt-2">Daftar Akun Pembeli</h1>
+        <p class="text-xs text-[#657166]/70">1 NIK = 1 Akun untuk pemesanan tiket resmi dan bebas calo</p>
       </div>
 
-      <div class="card-daebak p-8 bg-white/95 backdrop-blur-md shadow-xl border border-daebak-sage/40">
+      <Card padding-class="p-8">
         <form @submit.prevent="submit" class="space-y-4">
           <!-- NIK -->
-          <div>
-            <label class="block text-xs font-semibold text-daebak-charcoal mb-1">NIK (16 Digit - 1 Orang 1 Akun)</label>
-            <input
-              type="text"
-              v-model="form.nik"
-              required
-              maxlength="16"
-              placeholder="3171010000000000"
-              class="w-full input-daebak text-sm"
-              :class="{ 'border-rose-400': form.errors.nik }"
-            />
-            <p v-if="form.errors.nik" class="text-xs text-rose-600 mt-1">{{ form.errors.nik }}</p>
-          </div>
+          <TextInput
+            id="reg-nik"
+            label="NIK (16 Digit - Sesuai KTP)"
+            type="text"
+            v-model="form.nik"
+            required
+            maxlength="16"
+            placeholder="3171010000000000"
+            :error="form.errors.nik"
+            :disabled="form.processing"
+          />
 
           <!-- Nama Lengkap -->
-          <div>
-            <label class="block text-xs font-semibold text-daebak-charcoal mb-1">Nama Lengkap (Sesuai KTP)</label>
-            <input
-              type="text"
-              v-model="form.name"
-              required
-              placeholder="Jihan Fauziah"
-              class="w-full input-daebak text-sm"
-            />
-          </div>
+          <TextInput
+            id="reg-name"
+            label="Nama Lengkap (Sesuai KTP)"
+            type="text"
+            v-model="form.name"
+            required
+            placeholder="Jihan Fauziah"
+            :error="form.errors.name"
+            :disabled="form.processing"
+          />
 
           <div class="grid sm:grid-cols-2 gap-4">
             <!-- Username -->
-            <div>
-              <label class="block text-xs font-semibold text-daebak-charcoal mb-1">Username</label>
-              <input
-                type="text"
-                v-model="form.username"
-                required
-                placeholder="jihan_fauziah"
-                class="w-full input-daebak text-sm"
-              />
-              <p v-if="form.errors.username" class="text-xs text-rose-600 mt-1">{{ form.errors.username }}</p>
-            </div>
+            <TextInput
+              id="reg-username"
+              label="Username"
+              type="text"
+              v-model="form.username"
+              required
+              placeholder="jihan_fauziah"
+              :error="form.errors.username"
+              :disabled="form.processing"
+            />
 
             <!-- Email -->
-            <div>
-              <label class="block text-xs font-semibold text-daebak-charcoal mb-1">Email</label>
-              <input
-                type="email"
-                v-model="form.email"
-                required
-                placeholder="nama@email.com"
-                class="w-full input-daebak text-sm"
-              />
-              <p v-if="form.errors.email" class="text-xs text-rose-600 mt-1">{{ form.errors.email }}</p>
-            </div>
+            <TextInput
+              id="reg-email"
+              label="Email"
+              type="email"
+              v-model="form.email"
+              required
+              placeholder="nama@email.com"
+              :error="form.errors.email"
+              :disabled="form.processing"
+            />
           </div>
 
           <div class="grid sm:grid-cols-3 gap-4">
             <!-- Umur -->
-            <div>
-              <label class="block text-xs font-semibold text-daebak-charcoal mb-1">Umur</label>
-              <input
-                type="number"
-                v-model="form.age"
-                required
-                min="12"
-                max="100"
-                placeholder="22"
-                class="w-full input-daebak text-sm"
-              />
-            </div>
+            <TextInput
+              id="reg-age"
+              label="Umur"
+              type="number"
+              v-model="form.age"
+              required
+              min="12"
+              max="100"
+              placeholder="22"
+              :error="form.errors.age"
+              :disabled="form.processing"
+            />
 
             <!-- Tanggal Lahir -->
-            <div>
-              <label class="block text-xs font-semibold text-daebak-charcoal mb-1">Tgl Lahir</label>
-              <input
-                type="date"
-                v-model="form.dob"
-                required
-                class="w-full input-daebak text-sm"
-              />
-            </div>
+            <TextInput
+              id="reg-dob"
+              label="Tgl Lahir"
+              type="date"
+              v-model="form.dob"
+              required
+              :error="form.errors.dob"
+              :disabled="form.processing"
+            />
 
             <!-- Jenis Kelamin -->
             <div>
-              <label class="block text-xs font-semibold text-daebak-charcoal mb-1">Gender</label>
-              <select v-model="form.gender" required class="w-full input-daebak text-sm bg-white">
+              <label class="block text-sm font-medium text-[#657166] mb-1.5 font-sans">Gender</label>
+              <select
+                v-model="form.gender"
+                required
+                class="w-full bg-white text-[#657166] border-[1.5px] border-[#CFD6C4] rounded-[8px] px-3 py-2.5 text-[15px] font-sans focus:outline-none focus:border-[#99CDD8] focus:ring-3 focus:ring-[#99CDD8]/25"
+              >
                 <option value="female">Perempuan</option>
                 <option value="male">Laki-laki</option>
                 <option value="other">Lainnya</option>
@@ -108,52 +108,54 @@
 
           <div class="grid sm:grid-cols-2 gap-4">
             <!-- Password -->
-            <div>
-              <label class="block text-xs font-semibold text-daebak-charcoal mb-1">Password</label>
-              <input
-                type="password"
-                v-model="form.password"
-                required
-                placeholder="••••••••"
-                class="w-full input-daebak text-sm"
-              />
-              <p v-if="form.errors.password" class="text-xs text-rose-600 mt-1">{{ form.errors.password }}</p>
-            </div>
+            <TextInput
+              id="reg-password"
+              label="Password"
+              type="password"
+              v-model="form.password"
+              required
+              placeholder="••••••••"
+              :error="form.errors.password"
+              :disabled="form.processing"
+            />
 
             <!-- Konfirmasi Password -->
-            <div>
-              <label class="block text-xs font-semibold text-daebak-charcoal mb-1">Ulangi Password</label>
-              <input
-                type="password"
-                v-model="form.password_confirmation"
-                required
-                placeholder="••••••••"
-                class="w-full input-daebak text-sm"
-              />
-            </div>
+            <TextInput
+              id="reg-password-confirm"
+              label="Ulangi Password"
+              type="password"
+              v-model="form.password_confirmation"
+              required
+              placeholder="••••••••"
+              :disabled="form.processing"
+            />
           </div>
 
-          <button
-            type="submit"
-            :disabled="form.processing"
-            class="w-full btn-daebak-primary py-3.5 text-sm font-semibold shadow-md mt-4 flex items-center justify-center gap-2"
-          >
-            <span v-if="form.processing" class="inline-block animate-spin">⏳</span>
-            <span>{{ form.processing ? 'Memproses...' : 'Buat Akun Pembeli' }}</span>
-          </button>
+          <div class="pt-2">
+            <PrimaryButton
+              type="submit"
+              :loading="form.processing"
+              custom-class="w-full py-3.5 text-base"
+            >
+              Buat Akun Pembeli 🎉
+            </PrimaryButton>
+          </div>
         </form>
 
-        <p class="text-xs text-center text-daebak-charcoal/70 mt-6">
+        <p class="text-xs text-center text-[#657166]/75 mt-6">
           Sudah punya akun?
-          <a href="/login" class="font-semibold text-daebak-blue hover:underline">Masuk Ke Aplikasi</a>
+          <Link href="/login" class="font-semibold text-[#2D3A30] hover:underline ml-1">Masuk Ke Akun</Link>
         </p>
-      </div>
+      </Card>
     </div>
   </div>
 </template>
 
 <script setup>
-import { useForm } from '@inertiajs/vue3';
+import { Link, useForm } from '@inertiajs/vue3';
+import Card from '@/Components/Card.vue';
+import TextInput from '@/Components/TextInput.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
 
 const form = useForm({
   nik: '',
