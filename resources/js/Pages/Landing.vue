@@ -1,78 +1,107 @@
 <template>
-  <div class="min-h-screen bg-daebak-cream font-sans text-daebak-charcoal">
-    <!-- Navbar -->
-    <header class="sticky top-0 z-50 backdrop-blur-md bg-white/75 border-b border-daebak-sage/30 px-6 py-4 transition-all">
+  <div class="min-h-screen bg-[#FDE8D3] font-sans text-[#657166]">
+    <!-- Navbar (Fixed 72px equivalent) -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-white/85 border-b border-[#CFD6C4]/50 px-6 sm:px-8 py-4 transition-all">
       <div class="max-w-7xl mx-auto flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-daebak-blue to-daebak-coral flex items-center justify-center text-white font-heading text-xl shadow-md">
-            D
+        <Link href="/" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 rounded-[14px] bg-[#99CDD8] flex items-center justify-center font-heading text-xl text-[#2D3A30] shadow-[0_2px_8px_rgba(153,205,216,0.35)] group-hover:scale-105 transition-transform">
+            DT
           </div>
-          <span class="font-heading text-2xl tracking-wide text-daebak-charcoal">Daebak.Tix</span>
-        </div>
+          <span class="font-heading text-2xl tracking-wide text-[#657166]">Daebak.Tix</span>
+        </Link>
 
-        <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
-          <a href="#cara-kerja" class="hover:text-daebak-blue transition-colors">Cara Kerja</a>
-          <a href="#kategori" class="hover:text-daebak-blue transition-colors">Kategori Event</a>
-          <a href="#jual-tiket" class="hover:text-daebak-coral transition-colors">Jual Tiket</a>
+        <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-[#657166]">
+          <a href="#event-unggulan" class="hover:text-[#2D3A30] transition-colors">Event Konser</a>
+          <a href="#kategori" class="hover:text-[#2D3A30] transition-colors">Kategori</a>
+          <a href="#jual-tiket" class="hover:text-[#2D3A30] transition-colors">Untuk Promotor</a>
         </nav>
 
         <div class="flex items-center gap-3">
-          <a href="/login" class="px-5 py-2.5 rounded-xl border border-daebak-sage text-sm font-semibold hover:bg-white transition-all shadow-sm">
-            Masuk Pembeli
-          </a>
-          <a href="/seller/register" class="btn-daebak-secondary text-sm font-semibold shadow-sm">
+          <Link href="/login" class="px-5 py-2.5 rounded-[16px] border border-[#CFD6C4] bg-white text-sm font-semibold text-[#657166] hover:bg-[#DAEBE3]/40 transition-all shadow-[0_2px_8px_rgba(101,113,102,0.06)]">
+            Masuk
+          </Link>
+          <PrimaryButton href="/seller/register" custom-class="text-sm">
             Mulai Jual Tiket
-          </a>
+          </PrimaryButton>
         </div>
       </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="relative pt-16 pb-24 px-6 overflow-hidden">
-      <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+    <section class="relative pt-12 pb-20 px-6 overflow-hidden">
+      <!-- Decorative Pastel Blobs -->
+      <div class="absolute -top-20 -right-20 w-96 h-96 bg-[#99CDD8]/30 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-20 -left-20 w-96 h-96 bg-[#F3C3B2]/30 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center relative z-10">
         <div class="space-y-6">
-          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-daebak-mint text-xs font-semibold text-daebak-charcoal shadow-sm border border-daebak-sage/40">
-            ✨ Platform Tiket K-Pop #1 di Indonesia
-          </div>
-          <h1 class="font-heading text-4xl sm:text-6xl text-daebak-charcoal leading-tight">
-            Nonton Konser & Fanmeeting K-Pop Jadi <span class="bg-gradient-to-r from-daebak-blue via-daebak-coral to-daebak-mint bg-clip-text text-transparent">Lebih Praktis</span>
+          <Badge variant="mint" :dot="true">
+            Platform Tiket Konser & Fanmeeting K-Pop #1
+          </Badge>
+          
+          <h1 class="font-heading text-4xl sm:text-6xl text-[#657166] leading-[1.15]">
+            Nonton Idol Favorit Jadi <span class="text-[#2D3A30] underline decoration-[#99CDD8] decoration-wavy decoration-4">Lebih Praktis</span> & Aman
           </h1>
-          <p class="text-base sm:text-lg text-daebak-charcoal/80 max-w-xl leading-relaxed">
-            Daebak.Tix menghubungkan penggemar dengan promotor resmi secara cepat, aman, dan transparan. Tiket digital langsung terverifikasi dengan QR Code asli.
+          
+          <p class="text-base sm:text-lg text-[#657166]/85 max-w-xl leading-relaxed font-normal">
+            Daebak.Tix menghadirkan pengalaman ticketing konser K-Pop resmi berstandar LOKET.com dengan E-Ticket digital ber-QR Code asli dan pencegahan calo (1 Akun = 1 NIK).
           </p>
+
           <div class="flex flex-wrap gap-4 pt-2">
-            <a href="/login" class="btn-daebak-primary text-base px-8 py-3.5 shadow-lg hover:shadow-xl">
-              Cari Tiket Event 🎫
-            </a>
-            <a href="#jual-tiket" class="px-8 py-3.5 rounded-2xl bg-white border border-daebak-sage font-semibold text-daebak-charcoal hover:bg-daebak-mint/30 transition-all shadow-md">
-              Pelajari Fitur Penjual
-            </a>
+            <PrimaryButton href="/login" custom-class="text-base px-8 py-3.5 shadow-md">
+              Cari Tiket Konser 🎫
+            </PrimaryButton>
+            <SecondaryButton href="#jual-tiket" variant="mint" custom-class="text-base px-7 py-3.5">
+              Portal Promotor (Seller)
+            </SecondaryButton>
+          </div>
+
+          <!-- Feature highlight capsules -->
+          <div class="flex flex-wrap gap-3 pt-4 border-t border-[#CFD6C4]/50">
+            <span class="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full bg-white border border-[#CFD6C4]/50 shadow-xs">
+              🔒 100% Promotor Terverifikasi
+            </span>
+            <span class="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full bg-white border border-[#CFD6C4]/50 shadow-xs">
+              ⚡ Midtrans Instant Payment
+            </span>
+            <span class="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full bg-white border border-[#CFD6C4]/50 shadow-xs">
+              📱 PWA QR Staff Scanner
+            </span>
           </div>
         </div>
 
-        <!-- Right Visual Mockup -->
+        <!-- Right Featured Hero Card -->
         <div class="relative">
-          <div class="absolute -top-10 -right-10 w-72 h-72 bg-daebak-blue/30 rounded-full blur-3xl"></div>
-          <div class="absolute -bottom-10 -left-10 w-72 h-72 bg-daebak-coral/30 rounded-full blur-3xl"></div>
-          
-          <div class="card-daebak p-6 card-soft-gradient relative z-10">
-            <div class="bg-white rounded-2xl p-5 shadow-sm space-y-4">
-              <div class="relative h-48 rounded-xl overflow-hidden bg-slate-100">
-                <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=800&q=80" alt="BLACKPINK Born Pink" class="w-full h-full object-cover"/>
-                <span class="absolute top-3 right-3 bg-daebak-coral text-white text-xs px-3 py-1 rounded-full font-semibold shadow">
-                  K-Pop Concert
-                </span>
-              </div>
-              <div>
-                <h3 class="font-heading text-xl text-daebak-charcoal">BLACKPINK WORLD TOUR [BORN PINK]</h3>
-                <p class="text-xs text-daebak-charcoal/70">Stadion Utama Gelora Bung Karno (GBK)</p>
-              </div>
-              <div class="flex items-center justify-between pt-2 border-t border-daebak-sage/30">
-                <div>
-                  <span class="text-xs text-daebak-charcoal/60">Mulai dari</span>
-                  <p class="font-bold text-daebak-charcoal text-lg">Rp 2.400.000</p>
+          <div class="card-daebak p-6 bg-gradient-to-br from-[#DAEBE3] to-[#99CDD8]/40 border border-[#CFD6C4]/60">
+            <div class="bg-white rounded-[20px] p-5 shadow-sm space-y-4">
+              <div class="relative h-56 rounded-[16px] overflow-hidden bg-[#DAEBE3]/50">
+                <img
+                  src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=800&q=80"
+                  alt="BLACKPINK Born Pink"
+                  class="w-full h-full object-cover"
+                />
+                <div class="absolute top-3 left-3">
+                  <Badge variant="coral">WORLD TOUR</Badge>
                 </div>
-                <a href="/login" class="btn-daebak-primary text-xs py-2 px-4">Pesan Sekarang</a>
+                <div class="absolute top-3 right-3">
+                  <Badge variant="success">Tiket Tersedia</Badge>
+                </div>
+              </div>
+
+              <div>
+                <h3 class="font-heading text-2xl text-[#657166]">BLACKPINK WORLD TOUR [BORN PINK]</h3>
+                <p class="text-sm text-[#657166]/75 mt-0.5">📍 Stadion Utama Gelora Bung Karno, Jakarta</p>
+                <p class="text-xs text-[#657166]/60 mt-0.5">📅 25 - 26 November 2026 • 19:00 WIB</p>
+              </div>
+
+              <div class="flex items-center justify-between pt-3 border-t border-[#CFD6C4]/40">
+                <div>
+                  <span class="text-xs text-[#657166]/70">Harga Tiket Mulai</span>
+                  <p class="font-bold text-[#657166] text-xl font-sans">Rp 1.350.000</p>
+                </div>
+                <PrimaryButton href="/login" custom-class="text-xs px-5 py-2.5">
+                  Beli Tiket
+                </PrimaryButton>
               </div>
             </div>
           </div>
@@ -81,80 +110,83 @@
     </section>
 
     <!-- Categories Section -->
-    <section id="kategori" class="py-16 px-6 bg-white/60 backdrop-blur-sm border-y border-daebak-sage/30">
+    <section id="kategori" class="py-16 px-6 bg-white/70 backdrop-blur-sm border-y border-[#CFD6C4]/40">
       <div class="max-w-7xl mx-auto space-y-10">
-        <div class="text-center space-y-3">
-          <h2 class="font-heading text-3xl sm:text-4xl text-daebak-charcoal">Kategori Tiket Acara Korea</h2>
-          <p class="text-sm text-daebak-charcoal/70">Temukan berbagai bentuk acara favorit idol K-Pop kamu</p>
+        <div class="text-center space-y-2">
+          <Badge variant="mint">Eksplorasi Acara</Badge>
+          <h2 class="font-heading text-3xl sm:text-4xl text-[#657166]">Kategori Event Korea</h2>
+          <p class="text-sm text-[#657166]/70">Temukan pengalaman terbaik bersama artis & idol favoritmu</p>
         </div>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div class="card-daebak p-6 hover:border-daebak-blue transition-all">
-            <div class="w-12 h-12 rounded-2xl bg-daebak-mint flex items-center justify-center text-2xl mb-4">🎤</div>
-            <h3 class="font-heading text-xl mb-2">Konser Idol</h3>
-            <p class="text-xs text-daebak-charcoal/70 leading-relaxed">Konser panggung skala besar dengan produksi tata suara & pencahayaan kelas dunia.</p>
-          </div>
-          <div class="card-daebak p-6 hover:border-daebak-blue transition-all">
-            <div class="w-12 h-12 rounded-2xl bg-daebak-cream flex items-center justify-center text-2xl mb-4">🤝</div>
-            <h3 class="font-heading text-xl mb-2">Fanmeeting</h3>
-            <p class="text-xs text-daebak-charcoal/70 leading-relaxed">Interaksi hangat, games interaktif, hi-touch, dan foto bersama idol idaman.</p>
-          </div>
-          <div class="card-daebak p-6 hover:border-daebak-blue transition-all">
-            <div class="w-12 h-12 rounded-2xl bg-daebak-coral/40 flex items-center justify-center text-2xl mb-4">⛩️</div>
-            <h3 class="font-heading text-xl mb-2">Festival Budaya</h3>
-            <p class="text-xs text-daebak-charcoal/70 leading-relaxed">Festival kuliner K-Food, pameran K-Beauty, dan pertunjukan tarian tradisional Korea.</p>
-          </div>
-          <div class="card-daebak p-6 hover:border-daebak-blue transition-all">
-            <div class="w-12 h-12 rounded-2xl bg-daebak-blue/40 flex items-center justify-center text-2xl mb-4">🍿</div>
-            <h3 class="font-heading text-xl mb-2">Movie Screening</h3>
-            <p class="text-xs text-daebak-charcoal/70 leading-relaxed">Nonton bareng dokumenter konser atau premiere film Korea di bioskop terpilih.</p>
-          </div>
+          <Card hoverable padding-class="p-6">
+            <div class="w-12 h-12 rounded-[16px] bg-[#DAEBE3] flex items-center justify-center text-2xl mb-4 shadow-xs">🎤</div>
+            <h3 class="font-heading text-xl mb-1 text-[#657166]">Konser Idol</h3>
+            <p class="text-xs text-[#657166]/75 leading-relaxed">Konser panggung spektakuler dengan produksi audio visual & lighting kelas dunia.</p>
+          </Card>
+          <Card hoverable padding-class="p-6">
+            <div class="w-12 h-12 rounded-[16px] bg-[#FDE8D3] flex items-center justify-center text-2xl mb-4 shadow-xs">🤝</div>
+            <h3 class="font-heading text-xl mb-1 text-[#657166]">Fanmeeting</h3>
+            <p class="text-xs text-[#657166]/75 leading-relaxed">Momen akrab, sesi games interaktif, hi-touch, dan foto bersama sang idola.</p>
+          </Card>
+          <Card hoverable padding-class="p-6">
+            <div class="w-12 h-12 rounded-[16px] bg-[#F3C3B2]/50 flex items-center justify-center text-2xl mb-4 shadow-xs">⛩️</div>
+            <h3 class="font-heading text-xl mb-1 text-[#657166]">Festival K-Culture</h3>
+            <p class="text-xs text-[#657166]/75 leading-relaxed">Pameran kuliner K-Food, fashion, K-Beauty, dan pertunjukan tarian tradisional.</p>
+          </Card>
+          <Card hoverable padding-class="p-6">
+            <div class="w-12 h-12 rounded-[16px] bg-[#99CDD8]/50 flex items-center justify-center text-2xl mb-4 shadow-xs">🍿</div>
+            <h3 class="font-heading text-xl mb-1 text-[#657166]">Live Screening</h3>
+            <p class="text-xs text-[#657166]/75 leading-relaxed">Nonton bareng dokumenter konser atau live broadcast di layar bioskop pilihan.</p>
+          </Card>
         </div>
       </div>
     </section>
 
     <!-- Seller Banner Section -->
     <section id="jual-tiket" class="py-20 px-6">
-      <div class="max-w-7xl mx-auto card-daebak card-warm-gradient p-8 sm:p-12 relative overflow-hidden">
-        <div class="grid lg:grid-cols-2 gap-8 items-center relative z-10">
+      <div class="max-w-7xl mx-auto card-daebak p-8 sm:p-12 relative overflow-hidden bg-gradient-to-br from-[#FDE8D3] via-white to-[#F3C3B2]/30 border border-[#CFD6C4]/60">
+        <div class="grid lg:grid-cols-2 gap-10 items-center relative z-10">
           <div class="space-y-6">
-            <span class="inline-block px-4 py-1.5 rounded-full bg-white/80 text-xs font-bold text-daebak-charcoal">
-              Solusi Penjualan Tiket Promotor
-            </span>
-            <h2 class="font-heading text-3xl sm:text-5xl text-daebak-charcoal leading-tight">
-              Ingin Menjual Tiket Event Korea di Daebak.Tix?
+            <Badge variant="coral">Solusi Promotor & EO</Badge>
+            <h2 class="font-heading text-3xl sm:text-5xl text-[#657166] leading-tight">
+              Mitra Penjualan Tiket K-Event Terpercaya
             </h2>
-            <p class="text-sm sm:text-base text-daebak-charcoal/80 leading-relaxed">
-              Platform multi-tenant seller profesional dengan sistem pendaftaran terverifikasi manual oleh Admin, pilihan langganan flexibel (Per-Event / Paket Berbayar), dan fitur Scan QR Staff via PWA browser tanpa ribet.
+            <p class="text-sm sm:text-base text-[#657166]/85 leading-relaxed">
+              Platform multi-tenant seller profesional dengan proses verifikasi KYC admin, skema langganan fleksibel (Free vs Pro), dan alat Scanner Gate berbasis kamera web browser HP.
             </p>
             <div class="flex flex-wrap items-center gap-4 pt-2">
-              <a href="/seller/register" class="btn-daebak-dark px-8 py-3.5 text-base shadow-lg">
-                Daftar Sebagai Penjual 🚀
-              </a>
-              <a href="https://wa.me/6281234567890" target="_blank" class="px-6 py-3.5 rounded-2xl bg-white border border-daebak-sage font-semibold text-sm hover:bg-slate-50 transition-all shadow">
-                💬 Hubungi Admin via WhatsApp
+              <DarkButton href="/seller/register" custom-class="text-base px-8 py-3.5 shadow-md">
+                Daftar Sebagai Promotor 🚀
+              </DarkButton>
+              <a
+                href="https://wa.me/6281234567890"
+                target="_blank"
+                class="px-6 py-3.5 rounded-[16px] bg-white border border-[#CFD6C4] font-semibold text-sm text-[#657166] hover:bg-[#DAEBE3]/30 transition-all shadow-xs"
+              >
+                💬 Hubungi Kami via WhatsApp
               </a>
             </div>
           </div>
 
-          <div class="bg-white/90 backdrop-blur rounded-3xl p-6 shadow-xl space-y-4">
-            <h3 class="font-heading text-xl text-daebak-charcoal border-b border-daebak-sage/30 pb-3">Keunggulan Fitur Penjual</h3>
-            <ul class="space-y-3 text-sm">
+          <div class="bg-white/95 rounded-[24px] p-6 sm:p-8 border border-[#CFD6C4]/50 shadow-[0_4px_20px_rgba(101,113,102,0.08)] space-y-4">
+            <h3 class="font-heading text-xl text-[#657166] border-b border-[#CFD6C4]/30 pb-3">Keunggulan Ekosistem Daebak.Tix</h3>
+            <ul class="space-y-3.5 text-sm text-[#657166]">
               <li class="flex items-start gap-3">
-                <span class="text-emerald-600 font-bold">✓</span>
-                <span><strong>Verifikasi Manual Admin:</strong> Seller hanya diberikan akses setelah diverifikasi untuk mencegah penipuan tiket.</span>
+                <span class="w-6 h-6 rounded-full bg-[#DAEBE3] text-[#1E4D38] flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">✓</span>
+                <span><strong>Verifikasi Promotor Terpusat:</strong> Admin memastikan legalitas penyelenggara untuk melindungi reputasi dan pembeli.</span>
               </li>
               <li class="flex items-start gap-3">
-                <span class="text-emerald-600 font-bold">✓</span>
-                <span><strong>Pilihan Akun Berbayar vs Per-Event:</strong> Hemat biaya dengan skema per-event 7/12 hari atau langganan bulanan tanpa batas.</span>
+                <span class="w-6 h-6 rounded-full bg-[#DAEBE3] text-[#1E4D38] flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">✓</span>
+                <span><strong>Komisi Rendah & Model Subscription:</strong> Hemat biaya dengan skema Pro 2% atau Free 5% per tiket.</span>
               </li>
               <li class="flex items-start gap-3">
-                <span class="text-emerald-600 font-bold">✓</span>
-                <span><strong>Scan QR Staf PWA Kamera:</strong> Petugas lapangan tinggal buka web di HP tanpa download aplikasi tambahan.</span>
+                <span class="w-6 h-6 rounded-full bg-[#DAEBE3] text-[#1E4D38] flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">✓</span>
+                <span><strong>Staff Scanner PWA:</strong> Petugas gerbang cukup scan tiket lewat kamera browser tanpa instal aplikasi rumit.</span>
               </li>
               <li class="flex items-start gap-3">
-                <span class="text-emerald-600 font-bold">✓</span>
-                <span><strong>Midtrans Payment Gateway:</strong> Pembayaran aman QRIS, Bank Transfer VA, dan E-Wallet instant.</span>
+                <span class="w-6 h-6 rounded-full bg-[#DAEBE3] text-[#1E4D38] flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">✓</span>
+                <span><strong>Payment Gateway Midtrans:</strong> Dukungan QRIS, Virtual Account BCA/BNI/Mandiri, dan E-Wallet otomatis.</span>
               </li>
             </ul>
           </div>
@@ -163,48 +195,48 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-daebak-charcoal text-white pt-12 pb-8 px-6">
+    <footer class="bg-[#657166] text-white pt-12 pb-8 px-6">
       <div class="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
         <div class="space-y-4">
           <div class="flex items-center gap-2">
-            <div class="w-8 h-8 rounded-xl bg-daebak-blue text-daebak-charcoal flex items-center justify-center font-heading text-lg">D</div>
+            <div class="w-8 h-8 rounded-[10px] bg-[#99CDD8] text-[#2D3A30] flex items-center justify-center font-heading text-lg">DT</div>
             <span class="font-heading text-xl">Daebak.Tix</span>
           </div>
-          <p class="text-xs text-white/70 leading-relaxed">
-            Platform ticketing universal terkini khusus event Korea di Indonesia dengan pengalaman bertransaksi terpercaya.
+          <p class="text-xs text-white/75 leading-relaxed font-sans">
+            Platform ticketing universal terkini khusus konser & fanmeeting Korea di Indonesia dengan pengalaman bertransaksi terpercaya.
           </p>
         </div>
 
         <div>
-          <h4 class="font-heading text-base mb-4 text-daebak-mint">Menu Utama</h4>
-          <ul class="space-y-2 text-xs text-white/70">
-            <li><a href="/login" class="hover:text-white">Login Pembeli</a></li>
-            <li><a href="/signup" class="hover:text-white">Daftar Akun Pembeli</a></li>
-            <li><a href="/seller/register" class="hover:text-white">Pendaftaran Penjual</a></li>
+          <h4 class="font-heading text-base mb-4 text-[#DAEBE3]">Menu Utama</h4>
+          <ul class="space-y-2 text-xs text-white/75 font-sans">
+            <li><Link href="/login" class="hover:text-[#99CDD8] transition-colors">Login Pengguna</Link></li>
+            <li><Link href="/signup" class="hover:text-[#99CDD8] transition-colors">Daftar Akun Pembeli</Link></li>
+            <li><Link href="/seller/register" class="hover:text-[#99CDD8] transition-colors">Pendaftaran Promotor</Link></li>
           </ul>
         </div>
 
         <div>
-          <h4 class="font-heading text-base mb-4 text-daebak-mint">Bantuan & Hubungi</h4>
-          <ul class="space-y-2 text-xs text-white/70">
+          <h4 class="font-heading text-base mb-4 text-[#DAEBE3]">Bantuan & Kontak</h4>
+          <ul class="space-y-2 text-xs text-white/75 font-sans">
             <li>WhatsApp: +62 812-3456-7890</li>
-            <li>Email Admin: admin@daebaktix.com</li>
+            <li>Email: admin@daebaktix.com</li>
             <li>Jam Operasional: 09.00 - 18.00 WIB</li>
           </ul>
         </div>
 
         <div>
-          <h4 class="font-heading text-base mb-4 text-daebak-mint">Metode Pembayaran</h4>
-          <div class="flex flex-wrap gap-2 text-xs">
-            <span class="px-2.5 py-1 rounded bg-white/10">QRIS</span>
-            <span class="px-2.5 py-1 rounded bg-white/10">BCA VA</span>
-            <span class="px-2.5 py-1 rounded bg-white/10">Mandiri VA</span>
-            <span class="px-2.5 py-1 rounded bg-white/10">GoPay / ShopeePay</span>
+          <h4 class="font-heading text-base mb-4 text-[#DAEBE3]">Metode Pembayaran</h4>
+          <div class="flex flex-wrap gap-2 text-xs font-sans">
+            <span class="px-3 py-1 rounded-[8px] bg-white/15">QRIS</span>
+            <span class="px-3 py-1 rounded-[8px] bg-white/15">BCA VA</span>
+            <span class="px-3 py-1 rounded-[8px] bg-white/15">Mandiri VA</span>
+            <span class="px-3 py-1 rounded-[8px] bg-white/15">GoPay / ShopeePay</span>
           </div>
         </div>
       </div>
 
-      <div class="max-w-7xl mx-auto border-t border-white/10 pt-6 text-center text-xs text-white/50">
+      <div class="max-w-7xl mx-auto border-t border-white/15 pt-6 text-center text-xs text-white/60 font-sans">
         &copy; 2026 Daebak.Tix. All rights reserved. Made with ❤️ for K-Pop Fans in Indonesia.
       </div>
     </footer>
@@ -212,7 +244,17 @@
 </template>
 
 <script setup>
+import { Link } from '@inertiajs/vue3';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
+import DarkButton from '@/Components/DarkButton.vue';
+import Card from '@/Components/Card.vue';
+import Badge from '@/Components/Badge.vue';
+
 defineProps({
-  featuredEvents: Array
+  featuredEvents: {
+    type: Array,
+    default: () => []
+  }
 });
 </script>
